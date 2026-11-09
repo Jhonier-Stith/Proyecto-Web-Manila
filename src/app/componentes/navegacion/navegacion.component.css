@@ -1,0 +1,10 @@
+.barra-menu {
+  background-color: var(--superficie);
+  border-bottom: 2px solid var(--morado);
+}
+.navbar-brand {
+  color: var(--morado-claro);
+}
+.nav-link.active {
+  color: var(--acento);
+}

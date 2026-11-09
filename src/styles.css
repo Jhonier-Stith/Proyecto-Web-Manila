@@ -1,0 +1,106 @@
+:root {
+  --fondo: #0f0b1a;
+  --superficie: #1a1429;
+  --superficie-2: #241b3a;
+  --morado: #7c3aed;
+  --morado-claro: #a78bfa;
+  --acento: #f59e0b;
+  --texto: #ede9fe;
+  --texto-suave: #b8a9d9;
+}
+
+body {
+  background-color: var(--fondo);
+  color: var(--texto);
+}
+
+.btn-morado {
+  background-color: var(--morado);
+  border-color: var(--morado);
+  color: #fff;
+}
+.btn-morado:hover {
+  background-color: var(--morado-claro);
+  border-color: var(--morado-claro);
+  color: #0f0b1a;
+}
+
+.titulo-pagina {
+  color: var(--morado-claro);
+}
+
+.titulo-categoria {
+  color: var(--acento);
+  border-bottom: 2px solid var(--morado);
+  padding-bottom: 0.4rem;
+}
+
+.form-control.campo,
+.form-select.campo {
+  background-color: var(--superficie-2);
+  border: 1px solid var(--morado);
+  color: var(--texto);
+}
+.form-control.campo:focus,
+.form-select.campo:focus {
+  background-color: var(--superficie-2);
+  color: var(--texto);
+  border-color: var(--acento);
+  box-shadow: 0 0 0 0.2rem rgba(245, 158, 11, 0.25);
+}
+.form-control.campo::placeholder {
+  color: var(--texto-suave);
+}
+
+.btn.btn-morado {
+  background-color: var(--morado);
+  border-color: var(--morado);
+  color: #fff;
+}
+.btn.btn-morado:hover {
+  background-color: var(--morado-claro);
+  border-color: var(--morado-claro);
+  color: #0f0b1a;
+}
+
+.card.tarjeta-item {
+  background-color: var(--superficie);
+  border: 1px solid var(--morado);
+  border-radius: 12px;
+  color: var(--texto);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card.tarjeta-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.7);
+}
+.tarjeta-item .card-img-top {
+  height: 170px;
+  object-fit: cover;
+}
+.tarjeta-item .card-title {
+  color: var(--acento);
+}
+.tarjeta-item .ingredientes {
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+}
+.tarjeta-item .precio {
+  color: var(--acento);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* ===== Aviso flotante ===== */
+.aviso-flotante {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1080;
+  background-color: var(--morado);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.7);
+}

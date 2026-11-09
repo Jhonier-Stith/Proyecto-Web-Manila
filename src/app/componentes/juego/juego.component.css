@@ -1,0 +1,99 @@
+.subtitulo {
+  color: var(--texto-suave);
+}
+
+.caja {
+  background-color: var(--superficie);
+  border: 1px solid var(--morado);
+  border-radius: 12px;
+  padding: 1.5rem;
+  animation: aparecer 1.2s ease-in-out;
+}
+
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.casilla {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--superficie-2);
+  border: 1px solid var(--morado);
+  border-radius: 12px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.casilla:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.7);
+}
+
+.casilla.revelada {
+  cursor: default;
+}
+
+.casilla.revelada:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.signo {
+  color: var(--morado-claro);
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.casilla-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vacio {
+  color: var(--texto-suave);
+  font-size: 1.5rem;
+}
+
+.objetivo {
+  background-color: var(--superficie-2);
+  border: 1px solid var(--morado);
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.objetivo-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.objetivo-texto {
+  display: block;
+  padding: 0.5rem;
+  color: var(--acento);
+}
+
+.dato {
+  color: var(--acento);
+  font-weight: bold;
+}
+
+.mensaje-juego {
+  text-align: center;
+  color: var(--acento);
+  font-weight: bold;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

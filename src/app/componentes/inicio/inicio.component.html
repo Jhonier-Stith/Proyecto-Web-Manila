@@ -1,0 +1,71 @@
+<div id="carruselInicio" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    @for (imagen of imagenesCarrusel; track imagen; let i = $index) {
+      <button type="button" data-bs-target="#carruselInicio"
+              [attr.data-bs-slide-to]="i" [class.active]="i === 0"></button>
+    }
+  </div>
+  
+  <br>
+
+  <div class="carousel-inner">
+    @for (imagen of imagenesCarrusel; track imagen; let i = $index) {
+      <div class="carousel-item" [class.active]="i === 0">
+        <img [src]="imagen" class="d-block w-100" alt="Foto del restaurante">
+      </div>
+    }
+  </div>
+
+  <button class="carousel-control-prev" type="button"
+          data-bs-target="#carruselInicio" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button"
+          data-bs-target="#carruselInicio" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<section class="container my-5 p-4 p-md-5 seccion-bienvenida">
+  <h2 class="text-center titulo-seccion mb-4">Bienvenido a MANILA</h2>
+  <div class="row g-4 align-items-center justify-content-center">
+    <div class="col-12 col-lg-5">
+      <img src="https://i.pinimg.com/736x/b5/0a/73/b50a73bb5976d346647bb4400c4ca7d0.jpg"
+           class="img-fluid imagen-bienvenida" alt="Imagen de MANILA">
+    </div>
+    <div class="col-12 col-lg-7 text-center text-lg-start">
+      <p>En MANILA, la elegancia se combina con una exquisita variedad de sabores para ofrecerte una experiencia gastronómica única e inolvidable. Somos un restaurante que celebra la buena cocina, con una propuesta culinaria diversa que reúne platos cuidadosamente preparados, ingredientes de calidad y sabores capaces de conquistar todos los paladares.</p>
+      <p>Nuestro menú ofrece una amplia selección de especialidades, desde deliciosas carnes y pescados hasta pastas, mariscos y otras preparaciones que destacan por su sabor y presentación. Además, contamos con una variedad de bebidas ideales para complementar cada momento, todo en un ambiente amplio, elegante y acogedor, pensado para disfrutar, compartir y crear recuerdos especiales.</p>
+      <p>En MANILA, cada plato refleja nuestra pasión por la gastronomía, cada sabor invita a descubrir algo nuevo y cada detalle está pensado para brindarte una experiencia que quieras repetir.</p>
+      <p class="fw-bold">MANILA: Elegancia, sabor y momentos para recordar.</p>
+    </div>
+  </div>
+</section>
+
+<div class="container my-5">
+  <h2 class="text-center titulo-seccion mb-4">Nuestros favoritos</h2>
+  <div class="row g-4 justify-content-center">
+    <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+      <div class="led">
+        <div class="card tarjeta h-100">
+          <img [src]="platoEstrella.imagen" class="card-img-top" alt="Plato estrella">
+          <div class="card-body">
+            <h5 class="card-title fs-6"> {{ platoEstrella.nombre }}</h5>
+            <p class="card-text small">{{ platoEstrella.descripcion }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+      <div class="led">
+        <div class="card tarjeta h-100">
+          <img [src]="bebidaEstrella.imagen" class="card-img-top" alt="Bebida estrella">
+          <div class="card-body">
+            <h5 class="card-title fs-6"> {{ bebidaEstrella.nombre }}</h5>
+            <p class="card-text small">{{ bebidaEstrella.descripcion }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

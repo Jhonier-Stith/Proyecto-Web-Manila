@@ -1,0 +1,70 @@
+<div class="container my-5">
+  <h2 class="text-center titulo-pagina mb-4">Nuestras bebidas</h2>
+
+  <div class="row g-3 justify-content-center mb-4">
+    <div class="col-12 col-md-6">
+      <input type="text" class="form-control campo" placeholder="Buscar cóctel por nombre (ej: margarita)"
+             [(ngModel)]="nombre" (keyup.enter)="buscar()">
+    </div>
+    <div class="col-12 col-md-6">
+      <input type="text" class="form-control campo" placeholder="Buscar por ingrediente (ej: vodka)"
+             [(ngModel)]="ingrediente" (keyup.enter)="buscar()">
+    </div>
+    <div class="col-12 col-md-6">
+      <select class="form-select campo" [(ngModel)]="tipo">
+        <option value="">Tipo de bebida (todas)</option>
+        <option value="Alcoholic">Alcohólica</option>
+        <option value="Non_Alcoholic">Sin alcohol</option>
+      </select>
+    </div>
+    <div class="col-12 col-md-6">
+      <select class="form-select campo" [(ngModel)]="categoria">
+        <option value="">Categoría (todas)</option>
+        <option value="Ordinary_Drink">Bebida ordinaria</option>
+        <option value="Cocktail">Cóctel</option>
+      </select>
+    </div>
+    <div class="col-12 d-flex justify-content-center gap-2">
+      <button type="button" class="btn btn-morado" (click)="buscar()">Buscar</button>
+      <button type="button" class="btn btn-outline-light" (click)="limpiar()">Limpiar filtros</button>
+    </div>
+  </div>
+
+  @if (!cargando && resumenes.length === 0) {
+    <p class="text-center ingredientes my-5">No se encontraron bebidas con esos filtros.</p>
+  }
+
+  <div class="row g-4 mb-3">
+    @for (bebida of bebidas; track bebida.id) {
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card tarjeta-item h-100">
+          <img [src]="bebida.imagen" class="card-img-top" [alt]="bebida.nombre">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ bebida.nombre }}</h5>
+            <div class="mb-2">
+              <span class="badge etiqueta">{{ bebida.tipo }}</span>
+              <span class="badge etiqueta">{{ bebida.categoria }}</span>
+            </div>
+            <p class="ingredientes mb-2">{{ bebida.ingredientes.join(', ') }}</p>
+            <p class="precio mt-auto mb-2">$ {{ bebida.precio }}</p>
+            <button type="button" class="btn btn-morado btn-sm" (click)="agregar(bebida)">Agregar al pedido</button>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="text-center mb-5">
+    @if (cargando) {
+      <div class="spinner-border text-light" role="status"></div>
+    } @else if (cursor < resumenes.length) {
+      <button type="button" class="btn btn-outline-light btn-sm" (click)="cargarMas()">
+        Ver más ({{ bebidas.length }} de {{ resumenes.length }})
+      </button>
+    }
+  </div>
+</div>
+
+@if (aviso) {
+  <div class="aviso-flotante">✅ {{ aviso }}</div>
+}

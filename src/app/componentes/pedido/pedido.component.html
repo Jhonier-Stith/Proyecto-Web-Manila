@@ -1,0 +1,129 @@
+<div class="container my-5">
+  <h2 class="text-center titulo-pagina mb-4">Realizar pedido</h2>
+
+  <div class="row g-4">
+
+    <!-- Columna izquierda: datos y lista -->
+    <div class="col-12 col-lg-6">
+      <div class="caja mb-4">
+        <h4 class="titulo-categoria mb-3">Tus datos</h4>
+        <div class="mb-3">
+          <label class="form-label">Nombre completo</label>
+          <input type="text" class="form-control campo" placeholder="Ej: Juan Pérez"
+                 [(ngModel)]="nombre">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Celular</label>
+          <input type="tel" class="form-control campo" placeholder="Ej: 3001234567"
+                 [(ngModel)]="celular">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Dirección</label>
+          <input type="text" class="form-control campo" placeholder="Ej: Calle 10 # 5-20"
+                 [(ngModel)]="direccion">
+        </div>
+      </div>
+
+      <div class="caja">
+        <h4 class="titulo-categoria mb-3">Tu pedido</h4>
+
+        @if (items.length === 0) {
+          <p class="text-center mb-3">
+            Aún no has agregado nada. Mira nuestras
+            <a routerLink="/comidas" class="enlace">comidas</a> y
+            <a routerLink="/bebidas" class="enlace">bebidas</a>.
+          </p>
+        } @else {
+          <div class="table-responsive">
+            <table class="table align-middle tabla-pedido">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th style="width: 90px;">Cant.</th>
+                  <th class="text-end">Subtotal</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (item of items; track item.id) {
+                  <tr>
+                    <td>{{ item.nombre }}</td>
+                    <td>
+                      <input #cantidad type="number" class="form-control form-control-sm campo"
+                             [value]="item.cantidad" min="1"
+                             (change)="cambiarCantidad(item, cantidad)">
+                    </td>
+                    <td class="text-end">$ {{ item.cantidad * item.precio }}</td>
+                    <td class="text-end">
+                      <button type="button" class="btn btn-sm btn-outline-danger"
+                              (click)="quitar(item)" title="Quitar">✕</button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+          <p class="total text-end mb-3">Total a pagar: $ {{ total }}</p>
+        }
+
+        @if (error) {
+          <div class="alert alert-danger py-2">{{ error }}</div>
+        }
+
+        <div class="d-grid">
+          <button type="button" class="btn btn-morado" (click)="realizarPedido()">Realizar pedido</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Columna derecha: formato del pedido -->
+    <div class="col-12 col-lg-6">
+      @if (pedido; as p) {
+        <div class="formato">
+          <div class="text-center mb-3">
+            <div class="logo">🍽️ MANILA</div>
+            <small>Restaurante</small>
+          </div>
+
+          <hr>
+          <p class="mb-1"><strong>Fecha:</strong> {{ p.fecha }}</p>
+          <p class="mb-1"><strong>Cliente:</strong> {{ p.nombre }}</p>
+          <p class="mb-1"><strong>Celular:</strong> {{ p.celular }}</p>
+          <p class="mb-3"><strong>Dirección:</strong> {{ p.direccion }}</p>
+          <hr>
+
+          <table class="table table-sm formato-tabla">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th class="text-center">Cant.</th>
+                <th class="text-end">Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of p.items; track item.id) {
+                <tr>
+                  <td>{{ item.nombre }}</td>
+                  <td class="text-center">{{ item.cantidad }}</td>
+                  <td class="text-end">$ {{ item.cantidad * item.precio }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+
+          <p class="formato-total text-end">Total a pagar: $ {{ p.total }}</p>
+
+          <div class="d-grid gap-2 mt-3">
+            <button type="button" class="btn btn-morado" (click)="descargarPdf()">⬇️ Descargar PDF</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="nuevoPedido()">Hacer otro pedido</button>
+          </div>
+        </div>
+      } @else {
+        <div class="formato-vacio">
+          <p class="mb-0">Aquí aparecerá el formato de tu pedido cuando des clic en <strong>Realizar pedido</strong>.</p>
+        </div>
+      }
+    </div>
+
+  </div>
+</div>

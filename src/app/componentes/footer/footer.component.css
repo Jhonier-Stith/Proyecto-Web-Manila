@@ -1,0 +1,40 @@
+.pie {
+  background-color: var(--superficie);
+  border-top: 2px solid var(--morado);
+  color: var(--texto-suave);
+  margin-top: 2rem;
+}
+
+.pie-logo {
+  color: var(--morado-claro);
+  font-weight: bold;
+}
+
+.pie-titulo {
+  color: var(--acento);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.pie-texto {
+  color: var(--texto-suave);
+}
+
+.pie-enlace {
+  color: var(--texto-suave);
+  text-decoration: none;
+  transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.pie-enlace:hover {
+  color: var(--morado-claro);
+  padding-left: 6px;
+}
+
+.pie-final {
+  background-color: var(--fondo);
+  border-top: 1px solid var(--superficie-2);
+  color: var(--texto-suave);
+}

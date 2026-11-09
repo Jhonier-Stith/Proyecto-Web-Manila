@@ -1,0 +1,103 @@
+<div class="container my-5">
+  <h2 class="text-center titulo-pagina mb-4">Nuestras comidas</h2>
+
+  <div class="row g-3 justify-content-center mb-4">
+    <div class="col-12 col-md-5">
+      <input type="text" class="form-control campo" placeholder="Buscar comida por nombre (ej: pasta)"
+             [(ngModel)]="nombreBusqueda" (keyup.enter)="buscar()">
+    </div>
+    <div class="col-12 col-md-5">
+      <input type="text" class="form-control campo" placeholder="Buscar comida por ingrediente (ej: chicken)"
+             [(ngModel)]="ingredienteBusqueda" (keyup.enter)="buscar()">
+    </div>
+    <div class="col-12 col-md-2 d-grid">
+      <button type="button" class="btn btn-morado" (click)="buscar()">Buscar</button>
+    </div>
+  </div>
+
+  @if (modoBusqueda) {
+
+    <div class="text-center mb-4">
+      <button type="button" class="btn btn-outline-light btn-sm" (click)="limpiar()">
+        ← Ver todas las categorías
+      </button>
+    </div>
+
+    <h3 class="titulo-categoria mb-3">Resultados de la búsqueda</h3>
+
+    @if (!buscando && resumenesBusqueda.length === 0) {
+      <p class="text-center ingredientes my-5">No se encontraron comidas con esa búsqueda.</p>
+    }
+
+    <div class="row g-4 mb-3">
+      @for (plato of resultados; track plato.id) {
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="card tarjeta-item h-100">
+            <img [src]="plato.imagen" class="card-img-top" [alt]="plato.nombre">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ plato.nombre }}</h5>
+              <p class="ingredientes mb-2">{{ plato.ingredientes.slice(0, 6).join(', ') }}{{ plato.ingredientes.length > 6 ? '…' : '' }}</p>
+              <p class="precio mt-auto mb-2">$ {{ plato.precio }}</p>
+              <button type="button" class="btn btn-morado btn-sm" (click)="agregar(plato)">Agregar al pedido</button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="text-center mb-5">
+      @if (buscando) {
+        <div class="spinner-border text-light" role="status"></div>
+      } @else if (cursorBusqueda < resumenesBusqueda.length) {
+        <button type="button" class="btn btn-outline-light btn-sm" (click)="cargarMasBusqueda()">
+          Ver más ({{ resultados.length }} de {{ resumenesBusqueda.length }})
+        </button>
+      }
+    </div>
+
+  } @else {
+
+    @if (cargandoCategorias) {
+      <div class="text-center my-5">
+        <div class="spinner-border text-light" role="status"></div>
+      </div>
+    }
+
+    @for (grupo of grupos; track grupo.nombre) {
+      @if (grupo.cargando || grupo.platos.length > 0) {
+        <h3 class="titulo-categoria mb-3">{{ tituloCategoria(grupo.nombre) }}</h3>
+
+        <div class="row g-4 mb-3">
+          @for (plato of grupo.platos; track plato.id) {
+            <div class="col-12 col-sm-6 col-lg-3">
+              <div class="card tarjeta-item h-100">
+                <img [src]="plato.imagen" class="card-img-top" [alt]="plato.nombre">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">{{ plato.nombre }}</h5>
+                  <p class="ingredientes mb-2">{{ plato.ingredientes.slice(0, 6).join(', ') }}{{ plato.ingredientes.length > 6 ? '…' : '' }}</p>
+                  <p class="precio mt-auto mb-2">$ {{ plato.precio }}</p>
+                  <button type="button" class="btn btn-morado btn-sm" (click)="agregar(plato)">Agregar al pedido</button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+
+        <div class="text-center mb-5">
+          @if (grupo.cargando) {
+            <div class="spinner-border spinner-border-sm text-light" role="status"></div>
+          } @else if (grupo.cursor < grupo.resumenes.length) {
+            <button type="button" class="btn btn-outline-light btn-sm" (click)="cargarMasGrupo(grupo)">
+              Ver más de {{ tituloCategoria(grupo.nombre) }}
+            </button>
+          }
+        </div>
+      }
+    }
+
+  }
+</div>
+
+@if (aviso) {
+  <div class="aviso-flotante">✅ {{ aviso }}</div>
+}

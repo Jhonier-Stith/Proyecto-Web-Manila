@@ -1,0 +1,56 @@
+.caja {
+  background-color: var(--superficie);
+  border: 1px solid var(--morado);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.tabla-pedido {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--texto);
+  --bs-table-border-color: var(--superficie-2);
+}
+
+.total {
+  color: var(--acento);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.formato {
+  background-color: #eeebf0;
+  color: #1a1429;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--morado);
+}
+
+.formato-tabla {
+  --bs-table-bg: transparent;
+  --bs-table-color: #1a1429;
+  --bs-table-border-color: #d9d4e8;
+}
+
+.formato-total {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--morado);
+}
+
+.formato-vacio {
+  border: 2px dashed var(--morado);
+  border-radius: 12px;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: var(--texto-suave);
+}
+
+.enlace {
+  color: var(--acento);
+}

@@ -1,0 +1,76 @@
+<div class="container my-5">
+  <h2 class="text-center titulo-pagina mb-2">Juego MANILA</h2>
+  <p class="text-center subtitulo mb-4">Encuentra el plato y la bebida escondidos en el tablero</p>
+
+  @if (cargando) {
+    <div class="text-center my-5">
+      <div class="spinner-border text-light" role="status"></div>
+    </div>
+  } @else {
+    <div class="row g-4 justify-content-center">
+
+      <div class="col-12 col-lg-7">
+        <div class="caja caja-juego">
+          <div class="tablero">
+            @for (casilla of casillas; track casilla.id) {
+              <div class="casilla" [class.revelada]="casilla.revelada" (click)="elegir(casilla)">
+                @if (!casilla.revelada) {
+                  <span class="signo">?</span>
+                } @else if (casilla.tipo === 'plato') {
+                  <img [src]="platoObjetivo.imagen" class="casilla-img" alt="Plato encontrado">
+                } @else if (casilla.tipo === 'bebida') {
+                  <img [src]="bebidaObjetivo.imagen" class="casilla-img" alt="Bebida encontrada">
+                } @else {
+                  <span class="vacio">✖</span>
+                }
+              </div>
+            }
+          </div>
+          @if (mensaje) {
+            <p class="mensaje-juego mt-3 mb-0">{{ mensaje }}</p>
+          }
+        </div>
+      </div>
+
+      <div class="col-12 col-md-8 col-lg-5">
+        <div class="caja mb-4">
+          <h4 class="titulo-categoria mb-3">Debes encontrar</h4>
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="objetivo">
+                <img [src]="platoObjetivo.imagen" class="objetivo-img" alt="Plato a encontrar">
+                <small class="objetivo-texto">🍽️ {{ platoObjetivo.nombre }}</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="objetivo">
+                <img [src]="bebidaObjetivo.imagen" class="objetivo-img" alt="Bebida a encontrar">
+                <small class="objetivo-texto">🍹 {{ bebidaObjetivo.nombre }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="caja">
+          <h4 class="titulo-categoria mb-3">Tu partida</h4>
+          <div class="d-flex justify-content-between mb-2">
+            <span>Intentos</span>
+            <span class="dato">{{ intentos }}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <span>Encontradas</span>
+            <span class="dato">{{ encontradas }} / 2</span>
+          </div>
+          <div class="d-flex justify-content-between mb-4">
+            <span>Rondas ganadas</span>
+            <span class="dato">{{ rondasGanadas }}</span>
+          </div>
+          <div class="d-grid">
+            <button type="button" class="btn btn-morado" (click)="iniciar()">Reiniciar juego</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  }
+</div>

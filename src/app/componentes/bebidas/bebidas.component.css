@@ -1,0 +1,12 @@
+.etiqueta {
+  background-color: var(--superficie-2);
+  border: 1px solid var(--morado-claro);
+  color: var(--morado-claro);
+  font-weight: normal;
+}
+.tarjeta-item .card-img-top {
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+}
