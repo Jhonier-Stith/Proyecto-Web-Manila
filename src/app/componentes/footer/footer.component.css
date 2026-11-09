@@ -38,3 +38,43 @@
   border-top: 1px solid var(--superficie-2);
   color: var(--texto-suave);
 }
+
+.pie-texto {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.pie-correo {
+  max-width: 100%;
+}
+
+.pie-final {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.pie-creditos {
+  display: block;
+  overflow-wrap: anywhere;
+  line-height: 1.7;
+}
+
+
+@media (max-width: 576px) {
+  .pie .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .pie-logo {
+    font-size: 1.2rem;
+  }
+
+  .pie-texto {
+    font-size: 0.9rem;
+  }
+
+  .pie-creditos {
+    font-size: 0.8rem;
+  }
+}
