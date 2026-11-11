@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Destacado } from '../../entidades/destacado';
 import { ComidasService } from '../../servicios/comidas.service';
 import { BebidasService } from '../../servicios/bebidas.service';
+import { PedidoService } from '../../servicios/pedido.service';
 
 @Component({
   selector: 'app-inicio',
@@ -10,13 +11,14 @@ import { BebidasService } from '../../servicios/bebidas.service';
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css'
 })
-export class InicioComponent implements OnInit {
+export class InicioComponent implements OnInit, OnDestroy {
   imagenesCarrusel: string[] = [
     'https://i.pinimg.com/1200x/bb/2c/13/bb2c13a90c544f45ce6158b63f144349.jpg',
     'https://i.pinimg.com/736x/51/39/66/5139669f86dbb8cf1ca0238a00446bdb.jpg',
     'https://i.pinimg.com/736x/cd/96/1c/cd961c3df3ed18225a6426871a6f4ef6.jpg',
   ];
 
+  // Mientras llegan los datos de la API se muestra "Cargando..."
   platoEstrella: Destacado = new Destacado(
     'Cargando...',
     '',
@@ -29,9 +31,13 @@ export class InicioComponent implements OnInit {
     'https://placehold.co/600x400/241b3a/a78bfa?text=Cargando'
   );
 
+  aviso = '';
+  private temporizadorAviso?: any;
+
   constructor(
     private comidasService: ComidasService,
-    private bebidasService: BebidasService
+    private bebidasService: BebidasService,
+    private pedidoService: PedidoService
   ) {}
 
   ngOnInit(): void {
@@ -46,5 +52,25 @@ export class InicioComponent implements OnInit {
         this.bebidaEstrella = bebida;
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.temporizadorAviso);
+  }
+
+  agregarPlato(): void {
+    this.pedidoService.agregar('comida-' + this.platoEstrella.id, this.platoEstrella.nombre, this.platoEstrella.precio);
+    this.mostrarAviso(this.platoEstrella.nombre + ' agregado al pedido');
+  }
+
+  agregarBebida(): void {
+    this.pedidoService.agregar('bebida-' + this.bebidaEstrella.id, this.bebidaEstrella.nombre, this.bebidaEstrella.precio);
+    this.mostrarAviso(this.bebidaEstrella.nombre + ' agregada al pedido');
+  }
+
+  private mostrarAviso(texto: string): void {
+    this.aviso = texto;
+    clearTimeout(this.temporizadorAviso);
+    this.temporizadorAviso = setTimeout(() => (this.aviso = ''), 2000);
   }
 }

@@ -119,14 +119,17 @@ export class BebidasService {
     );
   }
 
-  private aDestacado(d: any): Destacado | null {
+private aDestacado(d: any): Destacado | null {
     if (!d) {
       return null;
     }
+    const bebida = this.aBebida(d);
     return new Destacado(
       d.strDrink,
       resumirTexto(d.strInstructionsES || d.strInstructions),
-      d.strDrinkThumb
+      d.strDrinkThumb,
+      bebida.id,
+      bebida.precio
     );
   }
 

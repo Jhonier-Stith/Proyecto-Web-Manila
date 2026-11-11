@@ -108,7 +108,8 @@ export class ComidasService {
     if (!m) {
       return null;
     }
-    return new Destacado(m.strMeal, resumirTexto(m.strInstructions), m.strMealThumb);
+    const plato = this.aPlato(m);
+    return new Destacado(m.strMeal, resumirTexto(m.strInstructions), m.strMealThumb, plato.id, plato.precio);
   }
 
   private aPlato(m: any): Plato {

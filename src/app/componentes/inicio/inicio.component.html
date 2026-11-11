@@ -49,9 +49,13 @@
       <div class="led">
         <div class="card tarjeta h-100">
           <img [src]="platoEstrella.imagen" class="card-img-top" alt="Plato estrella">
-          <div class="card-body">
+          <div class="card-body d-flex flex-column">
             <h5 class="card-title fs-6"> {{ platoEstrella.nombre }}</h5>
             <p class="card-text small">{{ platoEstrella.descripcion }}</p>
+            @if (platoEstrella.id) {
+              <p class="precio mt-auto mb-2">$ {{ platoEstrella.precio }}</p>
+            }
+            <button type="button" class="btn btn-morado btn-sm" [disabled]="!platoEstrella.id" (click)="agregarPlato()">Agregar al pedido</button>
           </div>
         </div>
       </div>
@@ -60,12 +64,20 @@
       <div class="led">
         <div class="card tarjeta h-100">
           <img [src]="bebidaEstrella.imagen" class="card-img-top" alt="Bebida estrella">
-          <div class="card-body">
+          <div class="card-body d-flex flex-column">
             <h5 class="card-title fs-6"> {{ bebidaEstrella.nombre }}</h5>
             <p class="card-text small">{{ bebidaEstrella.descripcion }}</p>
+            @if (bebidaEstrella.id) {
+              <p class="precio mt-auto mb-2">$ {{ bebidaEstrella.precio }}</p>
+            }
+            <button type="button" class="btn btn-morado btn-sm" [disabled]="!bebidaEstrella.id" (click)="agregarBebida()">Agregar al pedido</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+@if (aviso) {
+  <div class="aviso-flotante">✅ {{ aviso }}</div>
+}
